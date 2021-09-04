@@ -1,0 +1,74 @@
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ 
+    <title>UI5 Login Site</title>
+ 
+    <script id="sap-ui-bootstrap"
+            src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js"
+            data-sap-ui-libs="sap.m"
+            data-sap-ui-theme="sap_fiori_3" 
+            data-sap-ui-preload="async"
+            data-sap-ui-compatVersion="edge"
+            data-sap-ui-frameOptions='allow'>
+    </script>
+    <script type="text/javascript"
+      src="https://cdns.eu1.gigya.com/js/gigya.js?apiKey=3_6pdX2xa5VzJPAeDUzI6IYkz8eZBVa5TPMMuIKk-qw4GwnINTzlnWw6P8VeH8ggu7">
+    </script>
+ 
+
+
+    <script id="MainVPw" type="ui5/xmlview">
+        <mvc:View
+            controllerName="gigyalog.controller.MainVPw"
+            displayBlock="true"
+            xmlns="sap.m"
+            xmlns:mvc="sap.ui.core.mvc"
+            xmlns:html="http://www.w3.org/1999/xhtml">
+            <App id="appPw">
+                <Page>
+                   <content>
+                      <html:div id="gigya-login-container-Pw"/>
+                   </content>
+                </Page>
+            </App>
+        </mvc:View>
+    </script>
+<script>
+        sap.ui.getCore().attachInit(function () {
+            "use strict";
+ 
+            sap.ui.define([
+                "sap/ui/core/mvc/Controller"
+            ], function (Controller) {
+                return Controller.extend("gigyalog.controller.MainVPw", {
+                  
+				  onInit : function() {
+					
+						gigya.accounts.showScreenSet({
+
+								 screenSet: 'default-RegistrationLogin',
+								 containerID: this.byId('gigya-login-container-Pw').sId,
+								 lang: navigator.language 
+								
+
+						});
+                  },
+               });
+            });
+ 
+            sap.ui.require([
+                "jquery.sap.global"
+            ], function (jQuery) {
+                sap.ui.xmlview({
+                    viewContent: jQuery("#MainVPw").html()
+                }).placeAt('root');
+            });
+ 
+        });
+    </script>
+</head>
+<body class="sapUiBody" id="root"/>
+</html>
